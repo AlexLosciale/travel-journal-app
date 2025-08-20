@@ -1,8 +1,10 @@
 import { useState, useContext, useMemo } from "react";
 import { TripsContext } from "../context/TripsContext";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const { trips } = useContext(TripsContext);
+  const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
     place: "",
@@ -62,6 +64,7 @@ export default function HomePage() {
         <h1>Diario di viaggio</h1>
       </div>
 
+      {/* Filtri */}
       <div className="mb-4">
         <h5 className="mb-3">Filtra i tuoi viaggi</h5>
         <div className="row g-3 mb-3">
@@ -125,9 +128,15 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Lista viaggi */}
       <div className="mb-5">
         {filteredTrips.map((trip) => (
-          <div key={trip.id} className="card mb-4 shadow-sm">
+          <div
+            key={trip.id}
+            className="card mb-4 shadow-sm"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate(`/dettaglio/${trip.id}`)}
+          >
             <div className="row g-0">
               <div className="col-md-4">
                 {trip.media[0] && (
