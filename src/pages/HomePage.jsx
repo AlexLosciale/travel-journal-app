@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import { TripsContext } from "../context/TripsContext"; // Assumi il path corretto
+import { TripsContext } from "../context/TripsContext";
 
 export default function HomePage() {
-  const { trips } = useContext(TripsContext); // Leggi i viaggi dal context
+  const { trips } = useContext(TripsContext);
 
   const [filters, setFilters] = useState({
     place: "",
@@ -35,7 +35,6 @@ export default function HomePage() {
         <h1>Diario di viaggio</h1>
       </div>
 
-      {/* Sezione filtri */}
       <div className="mb-4">
         <h5 className="mb-3">Filtra i tuoi viaggi</h5>
         <div className="row g-3 mb-3">
@@ -99,7 +98,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Lista viaggi */}
       <div className="mb-5">
         {trips.map((trip) => (
           <div key={trip.id} className="card mb-4 shadow-sm">
