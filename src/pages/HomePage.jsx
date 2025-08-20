@@ -59,7 +59,6 @@ export default function HomePage() {
     <div className="container mt-4">
       <div className="text-center mb-4">
         <h1>Diario di viaggio</h1>
-        <p>Qui puoi tenere traccia dei tuoi viaggi.</p>
       </div>
 
       <div className="mb-4">
