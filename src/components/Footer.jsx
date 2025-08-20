@@ -9,7 +9,7 @@ export default function Footer() {
       >
         <div className="container">         
             <p className="mb-0" style={{ fontSize: "0.9rem" }}>
-                © 2025 Viaggiatori Felici. Tutti i diritti riservati.
+                © 2025 TRAVEL DIARY. Tutti i diritti riservati.
             </p>
           <p className="mb-3">
             <a

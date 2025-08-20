@@ -219,7 +219,7 @@ export default function FormPage() {
                 </label>
                 <input
                   type="range"
-                  className="form-range"
+                  className="form-range custom-range"
                   id="physicalEffort"
                   min="1"
                   max="5"
@@ -241,7 +241,7 @@ export default function FormPage() {
                 </label>
                 <input
                   type="range"
-                  className="form-range"
+                  className="form-range custom-range"
                   id="economicEffort"
                   min="1"
                   max="5"

@@ -1,0 +1,14 @@
+.custom-range::-webkit-slider-thumb {
+    background-color: black;
+    border: none;
+}
+  
+.custom-range::-moz-range-thumb {
+    background-color: black;
+    border: none;
+}
+  
+.custom-range::-ms-thumb {
+    background-color: black;
+    border: none;
+}
