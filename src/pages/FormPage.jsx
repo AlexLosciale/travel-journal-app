@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TripsContext } from "../context/TripsContext.jsx";
 
 export default function FormPage() {
+  const { addTrip } = useContext(TripsContext);
+
   const [formData, setFormData] = useState({
     mediaUrl: "",
     mediaFile: null,
@@ -40,6 +43,23 @@ export default function FormPage() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+      const media = formData.mediaFile
+        ? [URL.createObjectURL(formData.mediaFile)]
+        : [formData.mediaUrl];
+
+      addTrip({
+        place: formData.place,
+        description: formData.description,
+        mood: formData.mood,
+        positive: formData.positive,
+        negative: formData.negative,
+        physical: formData.physicalEffort,
+        economic: formData.economicEffort,
+        actualExpense: formData.expense,
+        tags: formData.tags.split(",").map((t) => t.trim()),
+        media,
+      });
+
       alert("Form inviato correttamente!");
 
       setFormData({
