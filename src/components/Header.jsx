@@ -5,9 +5,12 @@ export default function Header() {
     <header>
       <nav className="navbar navbar-expand navbar-light bg-light">
         <div className="nav navbar-nav">
-          <NavLink className="nav-item nav-link" to="/">
+            <NavLink className="nav-item nav-link" to="/">
             Home
-          </NavLink>
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/form">
+                Form
+            </NavLink>
         </div>
       </nav>
     </header>
