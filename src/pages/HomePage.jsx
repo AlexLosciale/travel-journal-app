@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
 import { TripsContext } from "../context/TripsContext";
 
 export default function HomePage() {
@@ -24,10 +24,37 @@ export default function HomePage() {
     setSortBy(e.target.value);
   };
 
-  const handleSearch = () => {
-    console.log("Filtri:", filters);
-    console.log("Ordinamento:", sortBy);
-  };
+  const filteredTrips = useMemo(() => {
+    let result = [...trips];
+
+    if (filters.place) {
+      result = result.filter((trip) =>
+        trip.place.toLowerCase().includes(filters.place.toLowerCase())
+      );
+    }
+
+    if (filters.mood) {
+      result = result.filter((trip) => trip.mood === filters.mood);
+    }
+
+    if (filters.radius) {
+      const radiusValue = parseFloat(filters.radius);
+      if (!isNaN(radiusValue)) {
+        result = result.filter((trip) => trip.distance <= radiusValue);
+      }
+    }
+
+    if (sortBy) {
+      result.sort((a, b) => {
+        if (sortBy === "expense") return a.actualExpense - b.actualExpense;
+        if (sortBy === "date") return new Date(a.date) - new Date(b.date);
+        if (sortBy === "distance") return a.distance - b.distance;
+        return 0;
+      });
+    }
+
+    return result;
+  }, [trips, filters, sortBy]);
 
   return (
     <div className="container mt-4">
@@ -92,14 +119,14 @@ export default function HomePage() {
         </div>
 
         <div className="text-center mt-3">
-          <button className="btn btn-primary" onClick={handleSearch}>
+          <button className="btn btn-primary" onClick={() => console.log(filters, sortBy)}>
             Cerca
           </button>
         </div>
       </div>
 
       <div className="mb-5">
-        {trips.map((trip) => (
+        {filteredTrips.map((trip) => (
           <div key={trip.id} className="card mb-4 shadow-sm">
             <div className="row g-0">
               <div className="col-md-4">
@@ -131,7 +158,6 @@ export default function HomePage() {
                       <p><strong>Tags:</strong> {trip.tags.join(", ")}</p>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
