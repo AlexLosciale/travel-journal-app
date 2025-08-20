@@ -26,6 +26,35 @@ export default function HomePage() {
     console.log("Ordinamento:", sortBy);
   };
 
+  const exampleTrips = [
+    {
+      id: 1,
+      place: "Roma",
+      description: "Bellissima città ricca di storia.",
+      mood: "Emozionato",
+      positive: "Ho apprezzato ogni monumento e piazza.",
+      negative: "Troppo turismo in alcune zone.",
+      physical: 3,
+      economic: 4,
+      actualExpense: 120,
+      tags: ["cultura", "storia"],
+      media: ["https://www.turismoroma.it/sites/default/files/Roma%20in%20breve.jpg"]
+    },
+    {
+      id: 2,
+      place: "Montagna",
+      description: "Trekking tra le vette.",
+      mood: "Rilassato",
+      positive: "L’aria fresca e il panorama mozzafiato.",
+      negative: "Sentieri impegnativi.",
+      physical: 5,
+      economic: 3,
+      actualExpense: 80,
+      tags: ["natura", "avventura"],
+      media: ["https://static2-viaggi.corriereobjects.it/wp-content/uploads/2021/07/14_Val_di_Funes_iStock-1.jpg?v=1626269084"]
+    }
+  ];
+
   return (
     <div className="container mt-4">
       <div className="text-center mb-4">
@@ -35,8 +64,6 @@ export default function HomePage() {
 
       <div className="mb-4">
         <h5 className="mb-3">Filtra i tuoi viaggi</h5>
-
-        {/* Riga unica per Luogo */}
         <div className="row g-3 mb-3">
           <div className="col-12">
             <input
@@ -50,7 +77,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Riga con 3 colonne: Mood, Raggio, Ordinamento */}
         <div className="row g-3">
           <div className="col-md-4">
             <select
@@ -99,8 +125,45 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div id="results">
-        {/* Risultati filtrati */}
+      <div className="mb-5">
+        {exampleTrips.map((trip) => (
+          <div key={trip.id} className="card mb-4 shadow-sm">
+            <div className="row g-0">
+              <div className="col-md-4">
+                {trip.media[0] && (
+                  <img
+                    src={trip.media[0]}
+                    alt={trip.place}
+                    className="img-fluid rounded-start"
+                    style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                  />
+                )}
+              </div>
+
+              <div className="col-md-8">
+                <div className="card-body">
+                  <h5 className="card-title">{trip.place}</h5>
+                  <p className="card-text">{trip.description}</p>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <p><strong>Stato d’animo:</strong> {trip.mood}</p>
+                      <p><strong>Riflessione positiva:</strong> {trip.positive}</p>
+                      <p><strong>Riflessione negativa:</strong> {trip.negative}</p>
+                    </div>
+                    <div className="col-md-6">
+                      <p><strong>Impegno fisico:</strong> {trip.physical}/5</p>
+                      <p><strong>Effort economico:</strong> {trip.economic}/5</p>
+                      <p><strong>Spesa effettiva:</strong> €{trip.actualExpense}</p>
+                      <p><strong>Tags:</strong> {trip.tags.join(", ")}</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
